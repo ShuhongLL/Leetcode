@@ -13,7 +13,7 @@
 class Solution:
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
         if not root:
-            return [[]]
+            return []
         self.results = []
         self.traversal([root])
         return self.results
@@ -30,4 +30,3 @@ class Solution:
         self.results.append(result)
         if len(children) > 0:
             self.traversal(children)
-
