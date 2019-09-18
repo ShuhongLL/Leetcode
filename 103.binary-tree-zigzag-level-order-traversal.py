@@ -31,8 +31,4 @@ class Solution:
             result = result[::-1]
         self.results.append(result)
         if len(children) > 0:
-            if fromRight:
-                self.traversal(children, False)
-            else:
-                self.traversal(children, True)
-
+            self.traversal(children, not fromRight)
