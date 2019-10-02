@@ -19,7 +19,6 @@ class Solution:
         return self.result
 
     def findSum(self, root:TreeNode, target: int, path: List[int]):
-        print(path)
         if root:
             if root.left == None and root.right == None:
                 if root.val == target:
