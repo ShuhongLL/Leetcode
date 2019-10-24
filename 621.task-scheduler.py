@@ -9,7 +9,7 @@ import itertools
 class Solution:
     """
     The most frequent appear element determin the output
-    (except len(tasks) exceed the max number of occurence)
+    (except len(tasks) exceed the max number of occurrence)
     Hence A__A__A+ is the general pattern for the answer
     Where A is the most frequent occurring element
     The return value would be: (A__A__...) + (A+ possible other tasks which appear same times)
