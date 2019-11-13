@@ -12,34 +12,29 @@
 #         self.left = None
 #         self.right = None
 
+# Bottom up + post traversal
 class Solution:
     def delNodes(self, root: TreeNode, to_delete: List[int]) -> List[TreeNode]:
         if not root:    return []
         self.to_delete = to_delete
         self.result = []
-        self.traversal(root, True)
+        if root.val not in self.to_delete:
+            self.result.append(root)
+        self.traversal(root)
         return self.result
 
-    def traversal(self, node: TreeNode, isHead: bool):
+    def traversal(self, node: TreeNode):
         if not node:    return
-        to_be_head = False
-        if node.val not in self.to_delete:
-            if isHead:    self.result.append(node)
-        else:   to_be_head = True
-        if node.left:
-            if node.left.val in self.to_delete:
-                self.traversal(node.left.left, True)
-                self.traversal(node.left.right, True)
-                node.left = None
-            else:
-                self.traversal(node.left, to_be_head)
-        if node.right:
-            if node.right.val in self.to_delete:
-                self.traversal(node.right.left, True)
-                self.traversal(node.right.right, True)
-                node.right = None
-            else:
-                self.traversal(node.right, to_be_head)
+        self.traversal(node.left)
+        self.traversal(node.right)
+        
+        if node.left and node.left.val in self.to_delete:
+            node.left = None
+        if node.right and node.right.val in self.to_delete:
+            node.right = None
+        if node.val in self.to_delete:
+            if node.left:   self.result.append(node.left)
+            if node.right:  self.result.append(node.right)
 
 # @lc code=end
 
