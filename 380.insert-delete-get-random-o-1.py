@@ -6,8 +6,8 @@ class RandomizedSet(object):
         """
         Initialize your data structure here.
         """
-        self.keys = []
-        self.dict = {}
+        self.values = []
+        self.val_index = {}
 
     def insert(self, val):
         """
@@ -15,10 +15,10 @@ class RandomizedSet(object):
         :type val: int
         :rtype: bool
         """
-        if val in self.dict:
+        if val in self.val_index:
             return False
-        self.keys.append(val)
-        self.dict[val] = len(self.keys) - 1
+        self.values.append(val)
+        self.val_index[val] = len(self.values) - 1
         return True
 
     def remove(self, val):
@@ -27,16 +27,16 @@ class RandomizedSet(object):
         :type val: int
         :rtype: bool
         """
-        if val not in self.dict:
+        if val not in self.val_index:
             return False
-        idx_to_del = self.dict[val]
-        last_idx, last_val = len(self.keys) - 1, self.keys[-1]
+        idx_to_del = self.val_index[val]
+        last_idx, last_val = len(self.values) - 1, self.values[-1]
         # assign the slot to be deleted with value of the last element
-        self.keys[idx_to_del] = last_val
-        self.dict[last_val] = idx_to_del
+        self.values[idx_to_del] = last_val
+        self.val_index[last_val] = idx_to_del
         # delete val from dict and the last element of the list
-        del self.dict[val]
-        self.keys.pop()
+        del self.val_index[val]
+        self.values.pop()
         return True
 
     def getRandom(self):
@@ -44,7 +44,7 @@ class RandomizedSet(object):
         Get a random element from the set.
         :rtype: int
         """
-        return random.choice(self.keys)
+        return random.choice(self.values)
 
 # Your RandomizedSet object will be instantiated and called as such:
 # obj = RandomizedSet()
