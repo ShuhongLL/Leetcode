@@ -17,6 +17,7 @@ class Solution:
 
             l = len(str(N))
             # all even length palindrome is a mutiple of 11
+            # e.g   1221    345543
             if l > 2 and l % 2 == 0:
                 N = 10 ** l
         
