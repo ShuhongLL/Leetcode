@@ -34,7 +34,7 @@ class Solution:
         # curr.next = tail
         # return head_t.next
 
-    # method: iterative
+    # method 2: iterative
         head_t = ListNode(-1)
         head_t.next = head
         prev = head_t
