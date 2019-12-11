@@ -6,7 +6,7 @@
 
 # @lc code=start
 class Solution:
-    # method 1: recursion + memorization
+    # method 1: divide and conquer + memorization
     # def wordBreak(self, s: str, wordDict: List[str]) -> bool:
     #     self.memo = {}
     #     self.dicts = wordDict
