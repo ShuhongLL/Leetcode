@@ -16,6 +16,4 @@ class Solution:
         else:
             for i in range(len(nums)):
                 if target - nums[i] > 0:
-                    nums_c = nums[:]
-                    nums_c.pop(i)
-                    self.k_sum(nums_c[i:], path + [nums[i]], k-1, target - nums[i])
+                    self.k_sum(nums[i+1:], path + [nums[i]], k-1, target - nums[i])
