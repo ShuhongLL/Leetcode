@@ -1,50 +1,24 @@
-#
-# @lc app=leetcode id=91 lang=python3
-#
-# [91] Decode Ways
-#
 class Solution:
     def numDecodings(self, s: str) -> int:
-        # edge case
-        if not s or (len(s) == 1 and s[0] == '0'):
+        if s[0] == '0':
             return 0
-        self.dicts = {}
-        self.nums = s
-        return self.recursiveFind(0)
-
-    def recursiveFind(self, index: int) -> int:
-        if index in self.dicts:
-            return self.dicts[index]
-        # return 0 if index exceeds the length of chars
-        if len(self.nums) == index:
-            return 0
-        # check if nums[index] is the last char
-        if len(self.nums) == index + 1:
-            self.dicts[index] = 1
+        if len(s) == 1:
             return 1
-        base = int(self.nums[index])
-        extra = int(self.nums[index + 1])
-        num = base * 10 + extra
-        if extra == 0:
-            if index + 2 == len(self.nums):
-                self.dicts[index] = 1
-                return 1
+        dp = [0] * (len(s) + 1)
+        dp[0], dp[1] = 1, 1
+
+        for i in range(1, len(s)):
+            v = int(s[i-1: i+1])
+            # for [a, b], 10 <= ab <= 26
+            if s[i] != '0' and v <= 26 and v >= 10:
+                dp[i+1] = dp[i] + dp[i-1]
+            # for [a, b], b = 0 and ab <= 26
+            elif s[i] == '0' and v <= 26 and v != 0:
+                dp[i+1] = dp[i-1]
+            # for [a, b], ab > 26
+            elif s[i] != '0':
+                dp[i+1] = dp[i]
+            # invalid
             else:
-                val = self.recursiveFind(index + 2)
-                self.dicts[index] = val
-                return val
-        elif num > 26:
-            val = self.recursiveFind(index + 1)
-            self.dicts[index] = val
-            return val
-        else:
-            if len(self.nums) == index + 2:
-                val = 2
-                if self.nums[-1] == '0':
-                    val = 1
-                self.dicts[index] = val
-                return val
-            else:
-                val = self.recursiveFind(index + 1) + self.recursiveFind(index + 2)
-                self.dicts[index] = val
-                return val
+                return 0
+        return dp[-1]
