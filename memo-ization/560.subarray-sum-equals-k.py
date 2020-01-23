@@ -6,16 +6,21 @@
 
 # @lc code=start
 import collections
+
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        sum_dict = collections.defaultdict(lambda: 0)
-        sum_dict[0] = 1
-        sums, result = 0, 0
-        for i in range(len(nums)):
-            sums += nums[i]
-            if sums - k in sum_dict:
-                result += sum_dict[sums - k]
-            sum_dict[sums] += 1
+        # k = sum(nums[:b]) - sum(nums[:a]), where a< b
+        seen = collections.defaultdict(lambda: 0)
+        # note: nums[:a] can be empty list []
+        seen[0] = 1
+        cur_sum, result = 0, 0
+        for num in nums:
+            cur_sum += num
+            if cur_sum - k in seen:
+                # seen[cur_sum - k] stores the number of different start points (a)
+                result += seen[cur_sum - k]
+            # end point (b) moves further
+            seen[cur_sum] += 1
         return result
 
 # @lc code=end
