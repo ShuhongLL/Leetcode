@@ -16,5 +16,3 @@ class Solution:
             self.dfs(bra - 1, ket, path + '(')
             if bra < ket:
                 self.dfs(bra, ket - 1, path + ')')
-
-
