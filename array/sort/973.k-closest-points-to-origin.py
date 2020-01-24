@@ -12,7 +12,8 @@ class Solution:
         length = []
         for num in points:
             length.append([num[0]*num[0] + num[1]*num[1], num])
-        length.sort()
-        return [length[n-1][1] for n in range(1, K+1)]
+        length = sorted(length)
+        return [length[i][1] for i in range(K)]
+
 # @lc code=end
 
