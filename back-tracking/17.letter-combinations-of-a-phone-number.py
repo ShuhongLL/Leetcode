@@ -5,12 +5,14 @@
 #
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        # edge
-        if digits == '':
+        if not digits:
             return []
+        self.result = []
+        self.back_tracking(digits, '')
+        return self.result
         
-        # create map
-        dicts = {
+    def back_tracking(self, digits: str, path: str):
+        num_to_let = {
             '2': ['a', 'b', 'c'],
             '3': ['d', 'e', 'f'],
             '4': ['g', 'h', 'i'],
@@ -20,15 +22,8 @@ class Solution:
             '8': ['t', 'u', 'v'],
             '9': ['w', 'x', 'y', 'z']
         }
-
-        output = []
-        #recursive iterate
-        def recursiveMap(combination: str, nextDigit: List[str]) -> None:
-            if len(nextDigit) == 0:
-                output.append(combination)
-            else:
-                for digit in dicts[nextDigit[0]]:
-                    recursiveMap(combination + digit, nextDigit[1:])
-        
-        recursiveMap('', digits)
-        return output
+        if not digits:
+            self.result.append(path)
+            return
+        for char in num_to_let[digits[0]]:
+            self.back_tracking(digits[1:], path + char)
