@@ -18,7 +18,8 @@
 ### number
 > str.isdigit()
 
-937
+### count
+> 'string'.count('target')
 
 ### regex
 > re.match(r'pattern', string)
