@@ -13,21 +13,11 @@
 
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
-        # if not head:
-        #     return
-        # stack = []
-        # cur = head
-        # prev = ListNode(-1)
-        # prev.next = head
-        # while cur:
-        #     prev.next = None
-        #     prev = cur
-        #     stack.append(cur)
-        #     cur = cur.next
-        # for i in range(len(stack)-1, 0, -1):
-        #     stack[i].next = stack[i-1]
-        # stack[0].next = None
-        # return stack[-1]
+        # prev = None
+        # node = head
+        # while node:
+        #     prev, node.next, node = node, prev, node.next
+        # return prev 
  
         cur = head
         prev = None
