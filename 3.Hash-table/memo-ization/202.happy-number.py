@@ -7,15 +7,15 @@
 # @lc code=start
 class Solution:
     def isHappy(self, n: int) -> bool:
-        seen = set()
+        memo = set()
         while True:
             if n == 1:
                 return True
             nums = list(map(int, str(n)))
             n = sum(i**2 for i in nums)
-            if n in seen:
+            if n in memo:
                 return False
-            seen.add(n)
+            memo.add(n)
 
 # @lc code=end
 
