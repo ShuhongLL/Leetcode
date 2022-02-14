@@ -1,4 +1,7 @@
 # Array
+
+### iterate backwards
+> [i for i in range(len(nums)-1, -1, -1)]
 ### sort multiple arrays based on one
 > [x for _, x in sorted(zip(Y, X), key=lambda s: s[0])]
 

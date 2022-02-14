@@ -9,19 +9,13 @@ import collections
 
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        # k = sum(nums[:b]) - sum(nums[:a]), where a< b
-        seen = collections.defaultdict(lambda: 0)
-        # note: nums[:a] can be empty list []
-        seen[0] = 1
+        memo = collections.defaultdict(lambda: 0)
+        memo[0] = 1
+        
         cur_sum, result = 0, 0
         for num in nums:
             cur_sum += num
-            if cur_sum - k in seen:
-                # seen[cur_sum - k] stores the number of different start points (a)
-                result += seen[cur_sum - k]
-            # end point (b) moves further
-            seen[cur_sum] += 1
+            if cur_sum - k in memo:
+                result += memo[cur_sum - k]
+            memo[cur_sum] += 1
         return result
-
-# @lc code=end
-
